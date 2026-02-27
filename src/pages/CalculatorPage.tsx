@@ -5,6 +5,14 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { ArrowRight, DollarSign, Percent, Home, Wallet, CreditCard, Clock } from "lucide-react";
+import { motion } from "framer-motion";
+
+const easing = [0.22, 1, 0.36, 1] as const;
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: easing } },
+};
 
 const CalculatorPage = () => {
   const [values, setValues] = useState({
@@ -43,79 +51,109 @@ const CalculatorPage = () => {
 
   const fmt = (n: number) => new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(n);
 
+  const fields = [
+    { label: "Property Price", key: "propertyPrice", placeholder: "350,000", icon: Home },
+    { label: "Down Payment", key: "downPayment", placeholder: "70,000", icon: Wallet },
+    { label: "Interest Rate (%)", key: "interestRate", placeholder: "6.5", icon: Percent },
+    { label: "Annual Income", key: "annualIncome", placeholder: "120,000", icon: DollarSign },
+    { label: "Monthly Debt", key: "monthlyDebt", placeholder: "500", icon: CreditCard },
+  ];
+
   return (
-    <main className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-      <div className="mb-12 text-center">
-        <h1 className="text-3xl font-bold text-foreground sm:text-4xl">Mortgage Calculator</h1>
-        <p className="mt-3 text-muted-foreground">Estimate your monthly payment and affordability</p>
-      </div>
+    <main className="relative min-h-screen">
+      <div className="absolute inset-0 mesh-bg" />
+      <div className="absolute inset-0 dot-pattern opacity-30" />
+      <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+        <motion.div className="mb-14 text-center" initial="hidden" animate="visible" variants={fadeUp}>
+          <span className="text-xs font-semibold uppercase tracking-widest text-accent">Tools</span>
+          <h1 className="mt-3 font-display text-3xl font-bold text-foreground sm:text-4xl lg:text-5xl">Mortgage Calculator</h1>
+          <p className="mt-4 text-muted-foreground text-lg">Estimate your monthly payment and affordability in seconds</p>
+        </motion.div>
 
-      <div className="grid gap-10 lg:grid-cols-2">
-        {/* Inputs */}
-        <div className="space-y-6">
-          {[
-            { label: "Property Price", key: "propertyPrice", placeholder: "350,000" },
-            { label: "Down Payment", key: "downPayment", placeholder: "70,000" },
-            { label: "Interest Rate (%)", key: "interestRate", placeholder: "6.5" },
-            { label: "Annual Income", key: "annualIncome", placeholder: "120,000" },
-            { label: "Monthly Debt", key: "monthlyDebt", placeholder: "500" },
-          ].map((field) => (
-            <div key={field.key} className="space-y-2">
-              <Label>{field.label}</Label>
-              <Input
-                type="number"
-                placeholder={field.placeholder}
-                value={(values as any)[field.key]}
-                onChange={(e) => update(field.key, e.target.value)}
-              />
-            </div>
-          ))}
-          <div className="space-y-2">
-            <Label>Loan Term (Years)</Label>
-            <Select value={values.loanTerm} onValueChange={(v) => update("loanTerm", v)}>
-              <SelectTrigger><SelectValue /></SelectTrigger>
-              <SelectContent>
-                <SelectItem value="15">15 Years</SelectItem>
-                <SelectItem value="20">20 Years</SelectItem>
-                <SelectItem value="25">25 Years</SelectItem>
-                <SelectItem value="30">30 Years</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-          <Button id="calculator-calculate-btn" onClick={calculate} className="w-full bg-accent text-accent-foreground hover:bg-accent/90" size="lg">
-            Calculate
-          </Button>
-        </div>
-
-        {/* Results */}
-        <div>
-          <Card className={`border-border/50 shadow-lg transition-all ${results ? "bg-gradient-to-br from-card to-accent/5" : ""}`}>
-            <CardHeader>
-              <CardTitle>Results Summary</CardTitle>
-            </CardHeader>
-            <CardContent>
-              {!results ? (
-                <p className="py-12 text-center text-muted-foreground">Enter your details and click Calculate to see results.</p>
-              ) : (
-                <div className="space-y-6">
-                  {[
-                    { label: "Estimated Loan Amount", value: fmt(results.loanAmount) },
-                    { label: "Estimated Monthly Payment", value: fmt(results.monthlyPayment) },
-                    { label: "Loan-to-Value (LTV)", value: `${results.ltv.toFixed(1)}%` },
-                    { label: "Debt-to-Income (DTI)", value: `${results.dti.toFixed(1)}%` },
-                  ].map((r) => (
-                    <div key={r.label} className="flex items-center justify-between rounded-lg border border-border/50 bg-background p-4">
-                      <span className="text-sm text-muted-foreground">{r.label}</span>
-                      <span className="text-lg font-bold text-foreground">{r.value}</span>
-                    </div>
-                  ))}
-                  <Button asChild id="continue-to-prequal-btn" className="w-full bg-primary text-primary-foreground hover:bg-primary/90" size="lg">
-                    <Link to="/pre-qualification">Continue to Pre-Qualification</Link>
-                  </Button>
+        <div className="grid gap-10 lg:grid-cols-2">
+          {/* Inputs */}
+          <motion.div className="space-y-5" initial="hidden" animate="visible" variants={fadeUp}>
+            <div className="glass rounded-2xl p-8 space-y-5">
+              {fields.map((field) => (
+                <div key={field.key} className="space-y-2">
+                  <Label className="text-sm font-medium flex items-center gap-2">
+                    <field.icon size={14} className="text-accent" />
+                    {field.label}
+                  </Label>
+                  <Input
+                    type="number"
+                    placeholder={field.placeholder}
+                    value={(values as any)[field.key]}
+                    onChange={(e) => update(field.key, e.target.value)}
+                    className="h-12 rounded-xl bg-background/60 border-border/50 focus:border-accent focus:ring-accent/20"
+                  />
                 </div>
-              )}
-            </CardContent>
-          </Card>
+              ))}
+              <div className="space-y-2">
+                <Label className="text-sm font-medium flex items-center gap-2">
+                  <Clock size={14} className="text-accent" />
+                  Loan Term (Years)
+                </Label>
+                <Select value={values.loanTerm} onValueChange={(v) => update("loanTerm", v)}>
+                  <SelectTrigger className="h-12 rounded-xl bg-background/60 border-border/50"><SelectValue /></SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="15">15 Years</SelectItem>
+                    <SelectItem value="20">20 Years</SelectItem>
+                    <SelectItem value="25">25 Years</SelectItem>
+                    <SelectItem value="30">30 Years</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <Button id="calculator-calculate-btn" onClick={calculate} className="w-full h-12 gradient-accent text-accent-foreground shadow-md glow-accent hover:shadow-lg hover:brightness-110 transition-all text-base rounded-xl" size="lg">
+                Calculate
+              </Button>
+            </div>
+          </motion.div>
+
+          {/* Results */}
+          <motion.div initial="hidden" animate="visible" variants={{ hidden: fadeUp.hidden, visible: { ...fadeUp.visible, transition: { duration: 0.5, ease: easing, delay: 0.2 } } }}>
+            <div className={`glass rounded-2xl shadow-xl transition-all duration-500 overflow-hidden ${results ? "glow-accent" : ""}`}>
+              <div className="px-8 py-6 border-b border-border/30">
+                <h3 className="font-display text-xl font-semibold text-foreground">Results Summary</h3>
+              </div>
+              <div className="p-8">
+                {!results ? (
+                  <div className="flex flex-col items-center justify-center py-16 text-center">
+                    <div className="h-16 w-16 rounded-2xl bg-muted/50 flex items-center justify-center mb-4">
+                      <DollarSign size={28} className="text-muted-foreground/40" />
+                    </div>
+                    <p className="text-muted-foreground">Enter your details and click Calculate to see results.</p>
+                  </div>
+                ) : (
+                  <div className="space-y-4">
+                    {[
+                      { label: "Estimated Loan Amount", value: fmt(results.loanAmount), color: "text-foreground" },
+                      { label: "Estimated Monthly Payment", value: fmt(results.monthlyPayment), color: "text-accent" },
+                      { label: "Loan-to-Value (LTV)", value: `${results.ltv.toFixed(1)}%`, color: "text-foreground" },
+                      { label: "Debt-to-Income (DTI)", value: `${results.dti.toFixed(1)}%`, color: results.dti > 43 ? "text-destructive" : "text-accent" },
+                    ].map((r, i) => (
+                      <motion.div
+                        key={r.label}
+                        className="flex items-center justify-between rounded-xl border border-border/30 bg-background/50 p-5"
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: i * 0.1 }}
+                      >
+                        <span className="text-sm text-muted-foreground">{r.label}</span>
+                        <span className={`font-display text-xl font-bold ${r.color}`}>{r.value}</span>
+                      </motion.div>
+                    ))}
+                    <Button asChild id="continue-to-prequal-btn" className="w-full h-12 gradient-primary text-primary-foreground shadow-md hover:shadow-lg transition-all text-base rounded-xl mt-4" size="lg">
+                      <Link to="/pre-qualification">
+                        Continue to Pre-Qualification
+                        <ArrowRight size={18} className="ml-2" />
+                      </Link>
+                    </Button>
+                  </div>
+                )}
+              </div>
+            </div>
+          </motion.div>
         </div>
       </div>
     </main>
