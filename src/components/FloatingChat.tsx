@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { MessageCircle, X } from "lucide-react";
+import { MessageCircle, X, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const FloatingChat = () => {
   const [open, setOpen] = useState(false);
@@ -9,27 +8,30 @@ const FloatingChat = () => {
   return (
     <div className="fixed bottom-6 right-6 z-50">
       {open && (
-        <Card className="mb-4 w-80 shadow-2xl animate-in slide-in-from-bottom-4">
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-base">Need Help?</CardTitle>
-            <button onClick={() => setOpen(false)} className="text-muted-foreground hover:text-foreground">
-              <X size={18} />
+        <div className="mb-4 w-80 glass-strong rounded-2xl shadow-2xl glow-accent animate-scale-in overflow-hidden">
+          <div className="flex items-center justify-between border-b border-border/30 px-5 py-4">
+            <div className="flex items-center gap-2">
+              <Sparkles size={16} className="text-accent" />
+              <span className="text-sm font-semibold text-foreground">Need Help?</span>
+            </div>
+            <button onClick={() => setOpen(false)} className="rounded-lg p-1 text-muted-foreground hover:bg-muted hover:text-foreground transition-colors">
+              <X size={16} />
             </button>
-          </CardHeader>
-          <CardContent>
-            <div className="flex h-48 items-center justify-center rounded-lg border border-dashed border-border bg-muted/30">
+          </div>
+          <div className="p-5">
+            <div className="flex h-52 items-center justify-center rounded-xl border border-dashed border-border/60 bg-muted/20">
               <p className="text-sm text-muted-foreground">FAQ Chatbot Placeholder</p>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       )}
       <Button
         id="chatbot-open-btn"
         onClick={() => setOpen(!open)}
-        className="h-14 w-14 rounded-full bg-accent text-accent-foreground shadow-lg hover:bg-accent/90"
+        className="h-14 w-14 rounded-full gradient-accent text-accent-foreground shadow-lg glow-accent hover:shadow-xl hover:scale-110 transition-all duration-300"
         size="icon"
       >
-        {open ? <X size={24} /> : <MessageCircle size={24} />}
+        {open ? <X size={22} /> : <MessageCircle size={22} />}
       </Button>
     </div>
   );

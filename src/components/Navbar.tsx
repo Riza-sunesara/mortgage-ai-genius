@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { Menu, X, Zap } from "lucide-react";
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -26,49 +25,53 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="sticky top-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-lg">
+    <nav className="sticky top-0 z-50 glass-strong">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <Link to="/" className="text-xl font-bold tracking-tight text-primary">
-          Mortgage<span className="text-accent">AI</span>
+        <Link to="/" className="flex items-center gap-2 text-xl font-bold tracking-tight font-display">
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg gradient-accent">
+            <Zap size={16} className="text-accent-foreground" />
+          </div>
+          <span className="text-foreground">Mortgage</span>
+          <span className="text-accent">AI</span>
         </Link>
 
         {/* Desktop */}
-        <div className="hidden items-center gap-8 md:flex">
+        <div className="hidden items-center gap-1 md:flex">
           {navLinks.map((link) => (
             <Link
               key={link.label}
               to={link.href}
               onClick={() => handleNavClick(link.href)}
-              className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+              className="rounded-lg px-4 py-2 text-sm font-medium text-muted-foreground transition-all hover:bg-accent/10 hover:text-foreground"
             >
               {link.label}
             </Link>
           ))}
-          <Button asChild className="bg-accent text-accent-foreground hover:bg-accent/90" id="start-assessment-btn">
+          <Button asChild className="ml-4 gradient-accent text-accent-foreground shadow-md hover:shadow-lg hover:brightness-110 transition-all" id="start-assessment-btn">
             <Link to="/pre-qualification">Start Assessment</Link>
           </Button>
         </div>
 
         {/* Mobile toggle */}
-        <button className="md:hidden" onClick={() => setMobileOpen(!mobileOpen)}>
-          {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+        <button className="rounded-lg p-2 hover:bg-muted md:hidden" onClick={() => setMobileOpen(!mobileOpen)}>
+          {mobileOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
       </div>
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div className="border-t bg-background px-4 pb-4 md:hidden">
+        <div className="border-t border-border/40 bg-card/95 backdrop-blur-xl px-4 pb-4 md:hidden animate-fade-in">
           {navLinks.map((link) => (
             <Link
               key={link.label}
               to={link.href}
               onClick={() => handleNavClick(link.href)}
-              className="block py-3 text-sm font-medium text-muted-foreground"
+              className="block rounded-lg py-3 px-3 text-sm font-medium text-muted-foreground hover:bg-muted"
             >
               {link.label}
             </Link>
           ))}
-          <Button asChild className="mt-2 w-full bg-accent text-accent-foreground hover:bg-accent/90">
+          <Button asChild className="mt-3 w-full gradient-accent text-accent-foreground">
             <Link to="/pre-qualification" onClick={() => setMobileOpen(false)}>Start Assessment</Link>
           </Button>
         </div>
