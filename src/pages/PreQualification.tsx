@@ -3,6 +3,8 @@ import { BrainCircuit, Clock, CheckCircle2, Loader2, ArrowRight, Home, RefreshCw
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext";
+import { supabase } from "@/integrations/supabase/client";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -39,9 +41,11 @@ const PreQualification = () => {
   const [step, setStep] = useState(0);
   const [finished, setFinished] = useState(false);
   const [analyzing, setAnalyzing] = useState(false);
+  const [answers, setAnswers] = useState<Record<string, string>>({});
   const bottomRef = useRef<HTMLDivElement>(null);
   const initialized = useRef(false);
   const navigate = useNavigate();
+  const { user } = useAuth();
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -66,8 +70,13 @@ const PreQualification = () => {
     return () => clearTimeout(timeout);
   }, []);
 
-  const handleSelect = (label: string) => {
+  const handleSelect = async (label: string, value: string) => {
     if (finished || analyzing) return;
+
+    const newAnswers = { ...answers };
+    if (step === 0) newAnswers.credit_score = value;
+    if (step === 1) newAnswers.loan_goal = value;
+    setAnswers(newAnswers);
 
     // Remove options entry, add user answer
     setEntries((prev) => [
@@ -87,7 +96,7 @@ const PreQualification = () => {
         ]);
       }, 600);
     } else {
-      // Final step — analyze
+      // Final step — analyze and save
       setAnalyzing(true);
       setTimeout(() => {
         setEntries((prev) => [
@@ -95,6 +104,16 @@ const PreQualification = () => {
           { id: Date.now() + 1, type: "bot", text: "Analyzing your profile..." },
         ]);
       }, 400);
+
+      // Save to Supabase
+      if (user) {
+        await supabase.from("mortgage_applications").insert({
+          user_id: user.id,
+          credit_score: newAnswers.credit_score,
+          loan_goal: newAnswers.loan_goal,
+          status: "pending",
+        });
+      }
 
       setTimeout(() => {
         setAnalyzing(false);
@@ -111,6 +130,7 @@ const PreQualification = () => {
     setStep(0);
     setFinished(false);
     setAnalyzing(false);
+    setAnswers({});
     initialized.current = false;
     setEntries([]);
     setTimeout(() => {
@@ -217,7 +237,7 @@ const PreQualification = () => {
                             key={opt.value}
                             variant="outline"
                             size="sm"
-                            onClick={() => handleSelect(opt.label)}
+                            onClick={() => handleSelect(opt.label, opt.value)}
                             className="rounded-xl border-accent/40 text-accent hover:gradient-accent hover:text-accent-foreground hover:border-transparent transition-all duration-200"
                           >
                             {opt.label}
@@ -251,6 +271,13 @@ const PreQualification = () => {
                           </p>
                           <div className="flex flex-col sm:flex-row gap-3">
                             <Button
+                              id="prequal-view-dashboard-btn"
+                              className="rounded-xl gradient-accent text-accent-foreground gap-1.5"
+                              onClick={() => navigate("/dashboard")}
+                            >
+                              <ArrowRight size={14} /> View Dashboard
+                            </Button>
+                            <Button
                               id="prequal-return-home-btn"
                               variant="outline"
                               className="rounded-xl gap-1.5"
@@ -260,10 +287,11 @@ const PreQualification = () => {
                             </Button>
                             <Button
                               id="prequal-restart-btn"
-                              className="rounded-xl gradient-accent text-accent-foreground gap-1.5"
+                              variant="outline"
+                              className="rounded-xl gap-1.5"
                               onClick={handleRestart}
                             >
-                              <RefreshCw size={14} /> Restart Assessment
+                              <RefreshCw size={14} /> Restart
                             </Button>
                           </div>
                         </div>
@@ -276,11 +304,7 @@ const PreQualification = () => {
               </AnimatePresence>
 
               {analyzing && (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  className="flex justify-start"
-                >
+                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex justify-start">
                   <div className="flex items-start gap-3">
                     <div className="mt-1 w-8 h-8 rounded-full gradient-accent flex items-center justify-center shrink-0">
                       <BrainCircuit size={14} className="text-accent-foreground" />

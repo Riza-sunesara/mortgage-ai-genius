@@ -1,5 +1,7 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext";
+import AuthModal from "@/components/AuthModal";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -15,6 +17,9 @@ const fadeUp = {
 };
 
 const CalculatorPage = () => {
+  const { user } = useAuth();
+  const navigate = useNavigate();
+  const [authOpen, setAuthOpen] = useState(false);
   const [values, setValues] = useState({
     propertyPrice: "",
     downPayment: "",
@@ -60,6 +65,7 @@ const CalculatorPage = () => {
   ];
 
   return (
+    <>
     <main className="relative min-h-screen">
       <div className="absolute inset-0 mesh-bg" />
       <div className="absolute inset-0 dot-pattern opacity-30" />
@@ -143,11 +149,16 @@ const CalculatorPage = () => {
                         <span className={`font-display text-xl font-bold ${r.color}`}>{r.value}</span>
                       </motion.div>
                     ))}
-                    <Button asChild id="continue-to-prequal-btn" className="w-full h-12 gradient-primary text-primary-foreground shadow-md hover:shadow-lg transition-all text-base rounded-xl mt-4" size="lg">
-                      <Link to="/pre-qualification">
-                        Continue to Pre-Qualification
-                        <ArrowRight size={18} className="ml-2" />
-                      </Link>
+                    <Button
+                      id="continue-to-prequal-btn"
+                      className="w-full h-12 gradient-primary text-primary-foreground shadow-md hover:shadow-lg transition-all text-base rounded-xl mt-4"
+                      size="lg"
+                      onClick={() => {
+                        if (!user) { setAuthOpen(true); } else { navigate("/pre-qualification"); }
+                      }}
+                    >
+                      Continue to Pre-Qualification
+                      <ArrowRight size={18} className="ml-2" />
                     </Button>
                   </div>
                 )}
@@ -157,6 +168,8 @@ const CalculatorPage = () => {
         </div>
       </div>
     </main>
+    <AuthModal open={authOpen} onOpenChange={setAuthOpen} />
+    </>
   );
 };
 
