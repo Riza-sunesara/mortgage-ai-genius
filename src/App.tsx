@@ -13,6 +13,10 @@ import CalculatorPage from "./pages/CalculatorPage";
 import PreQualification from "./pages/PreQualification";
 import ApplicationSubmitted from "./pages/ApplicationSubmitted";
 import Dashboard from "./pages/Dashboard";
+<<<<<<< HEAD
+=======
+import AdminDashboard from "./pages/AdminDashboard";
+>>>>>>> ec57b9a (Added pre-qualification bot and Admin Dashboard logic)
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -35,6 +39,12 @@ const App = () => (
             <Route path="/dashboard" element={
               <ProtectedRoute><Dashboard /></ProtectedRoute>
             } />
+<<<<<<< HEAD
+=======
+            <Route path="/admin" element={
+              <ProtectedRoute><AdminDashboard /></ProtectedRoute>
+            } />
+>>>>>>> ec57b9a (Added pre-qualification bot and Admin Dashboard logic)
             <Route path="*" element={<NotFound />} />
           </Routes>
           <Footer />

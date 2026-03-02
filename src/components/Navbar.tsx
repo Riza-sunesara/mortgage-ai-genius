@@ -19,6 +19,17 @@ const Navbar = () => {
   const navigate = useNavigate();
   const { user, signOut } = useAuth();
 
+<<<<<<< HEAD
+=======
+  const isAdmin = (() => {
+    const role =
+      (user as any)?.app_metadata?.role ??
+      (user as any)?.user_metadata?.role ??
+      (user as any)?.role;
+    return role === "admin";
+  })();
+
+>>>>>>> ec57b9a (Added pre-qualification bot and Admin Dashboard logic)
   const handleNavClick = (href: string) => {
     setMobileOpen(false);
     if (href.startsWith("/#")) {
@@ -33,6 +44,11 @@ const Navbar = () => {
     setMobileOpen(false);
     if (!user) {
       setAuthOpen(true);
+<<<<<<< HEAD
+=======
+    } else if (isAdmin) {
+      navigate("/admin");
+>>>>>>> ec57b9a (Added pre-qualification bot and Admin Dashboard logic)
     } else {
       navigate("/pre-qualification");
     }
@@ -64,10 +80,17 @@ const Navbar = () => {
             ))}
             {user && (
               <Link
+<<<<<<< HEAD
                 to="/dashboard"
                 className="rounded-lg px-4 py-2 text-sm font-medium text-muted-foreground transition-all hover:bg-accent/10 hover:text-foreground flex items-center gap-1.5"
               >
                 <LayoutDashboard size={14} /> Dashboard
+=======
+                to={isAdmin ? "/admin" : "/dashboard"}
+                className="rounded-lg px-4 py-2 text-sm font-medium text-muted-foreground transition-all hover:bg-accent/10 hover:text-foreground flex items-center gap-1.5"
+              >
+                <LayoutDashboard size={14} /> {isAdmin ? "Admin" : "Dashboard"}
+>>>>>>> ec57b9a (Added pre-qualification bot and Admin Dashboard logic)
               </Link>
             )}
             {user ? (
@@ -89,7 +112,11 @@ const Navbar = () => {
                 className="ml-4 gradient-accent text-accent-foreground shadow-md hover:shadow-lg hover:brightness-110 transition-all"
                 id="start-assessment-btn"
               >
+<<<<<<< HEAD
                 Start Assessment
+=======
+                Let's Get Started
+>>>>>>> ec57b9a (Added pre-qualification bot and Admin Dashboard logic)
               </Button>
             )}
           </div>
@@ -115,11 +142,19 @@ const Navbar = () => {
             ))}
             {user && (
               <Link
+<<<<<<< HEAD
                 to="/dashboard"
                 onClick={() => setMobileOpen(false)}
                 className="block rounded-lg py-3 px-3 text-sm font-medium text-muted-foreground hover:bg-muted"
               >
                 Dashboard
+=======
+                to={isAdmin ? "/admin" : "/dashboard"}
+                onClick={() => setMobileOpen(false)}
+                className="block rounded-lg py-3 px-3 text-sm font-medium text-muted-foreground hover:bg-muted"
+              >
+                {isAdmin ? "Admin" : "Dashboard"}
+>>>>>>> ec57b9a (Added pre-qualification bot and Admin Dashboard logic)
               </Link>
             )}
             {user ? (
@@ -135,7 +170,11 @@ const Navbar = () => {
                 className="mt-3 w-full gradient-accent text-accent-foreground"
                 onClick={handleStartAssessment}
               >
+<<<<<<< HEAD
                 Start Assessment
+=======
+                Let's Get Started
+>>>>>>> ec57b9a (Added pre-qualification bot and Admin Dashboard logic)
               </Button>
             )}
           </div>

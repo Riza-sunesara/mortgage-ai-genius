@@ -12,6 +12,14 @@ dist
 dist-ssr
 *.local
 
+<<<<<<< HEAD
+# Environment variables (never commit secrets)
+.env
+.env.*
+!.env.example
+
+=======
+>>>>>>> ec57b9a (Added pre-qualification bot and Admin Dashboard logic)
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -22,3 +30,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+<<<<<<< HEAD
+=======
+
+.env
+.env.example
+>>>>>>> ec57b9a (Added pre-qualification bot and Admin Dashboard logic)

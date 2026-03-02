@@ -27,7 +27,16 @@ const AuthModal = ({ open, onOpenChange }: AuthModalProps) => {
     if (mode === "login") {
       const { error } = await signIn(email, password);
       if (error) {
+<<<<<<< HEAD
         toast({ title: "Login failed", description: error.message, variant: "destructive" });
+=======
+        if (error.message === "Invalid login credentials" || error.message.toLowerCase().includes("not found")) {
+          toast({ title: "Account not found", description: "Switching to sign up...", variant: "default" });
+          setMode("signup");
+        } else {
+          toast({ title: "Login failed", description: error.message, variant: "destructive" });
+        }
+>>>>>>> ec57b9a (Added pre-qualification bot and Admin Dashboard logic)
       } else {
         toast({ title: "Welcome back!" });
         onOpenChange(false);
@@ -35,7 +44,16 @@ const AuthModal = ({ open, onOpenChange }: AuthModalProps) => {
     } else {
       const { error } = await signUp(email, password);
       if (error) {
+<<<<<<< HEAD
         toast({ title: "Sign up failed", description: error.message, variant: "destructive" });
+=======
+        if (error.message === "User already registered") {
+          toast({ title: "Account already exists", description: "Switching to sign in...", variant: "default" });
+          setMode("login");
+        } else {
+          toast({ title: "Sign up failed", description: error.message, variant: "destructive" });
+        }
+>>>>>>> ec57b9a (Added pre-qualification bot and Admin Dashboard logic)
       } else {
         toast({ title: "Account created!", description: "You can now sign in." });
         onOpenChange(false);
@@ -84,7 +102,11 @@ const AuthModal = ({ open, onOpenChange }: AuthModalProps) => {
             id="auth-submit-btn"
           >
             {loading && <Loader2 size={16} className="mr-2 animate-spin" />}
+<<<<<<< HEAD
             {mode === "login" ? "Sign In" : "Create Account"}
+=======
+            Continue
+>>>>>>> ec57b9a (Added pre-qualification bot and Admin Dashboard logic)
           </Button>
         </form>
         <p className="text-center text-sm text-muted-foreground">

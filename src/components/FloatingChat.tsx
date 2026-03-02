@@ -1,90 +1,112 @@
 import { useState, useRef, useEffect } from "react";
-import { MessageCircle, X, Sparkles, Send, ArrowRight, LogIn } from "lucide-react";
+import { MessageCircle, X, Sparkles, Send, LogIn } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { useAuth } from "@/contexts/AuthContext";
 import AuthModal from "@/components/AuthModal";
 
 interface ChatMessage {
   id: number;
   text: string;
   sender: "bot" | "user";
-  showAssessmentBtn?: boolean;
-  showLoginBtn?: boolean;
+  showSignupBtn?: boolean;
 }
-
-const PERSONAL_KEYWORDS = [
-  "my application", "my status", "show my data", "my mortgage",
-  "my profile", "my account", "application status", "my documents",
-];
 
 const FloatingChat = () => {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([
-    { id: 0, text: "Hi! I'm your MortgageAI Assistant. How can I help you today?", sender: "bot" },
+    {
+      id: 0,
+      text: "Hi! I'm your US Mortgage Education Assistant. Ask me about mortgage concepts, processes, or how to use tools on this site.",
+      sender: "bot",
+    },
   ]);
   const [input, setInput] = useState("");
   const [typing, setTyping] = useState(false);
-  const [hasReplied, setHasReplied] = useState(false);
+<<<<<<< HEAD
   const bottomRef = useRef<HTMLDivElement>(null);
-  const navigate = useNavigate();
-  const { user } = useAuth();
   const [authOpen, setAuthOpen] = useState(false);
+=======
+  const [authOpen, setAuthOpen] = useState(false);
+  const bottomRef = useRef<HTMLDivElement>(null);
+>>>>>>> ec57b9a (Added pre-qualification bot and Admin Dashboard logic)
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, typing]);
 
-  const isPersonalQuery = (text: string) =>
-    PERSONAL_KEYWORDS.some((kw) => text.toLowerCase().includes(kw));
-
-  const handleSend = () => {
+  const handleSend = async () => {
     const trimmed = input.trim();
-    if (!trimmed || hasReplied) return;
+    if (!trimmed) return;
 
-    const userMsg: ChatMessage = { id: Date.now(), text: trimmed, sender: "user" };
+    // Basic client-side length guard to mirror backend validation
+    if (trimmed.length > 1000) {
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: Date.now(),
+          text: "Please keep your question under 1000 characters.",
+          sender: "bot",
+        },
+      ]);
+      return;
+    }
+
+    const userMsg: ChatMessage = {
+      id: Date.now(),
+      text: trimmed,
+      sender: "user",
+    };
+<<<<<<< HEAD
+=======
+
+>>>>>>> ec57b9a (Added pre-qualification bot and Admin Dashboard logic)
     setMessages((prev) => [...prev, userMsg]);
     setInput("");
     setTyping(true);
 
-    const personal = isPersonalQuery(trimmed);
+    try {
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          message: trimmed,
+          mode: "general",
+        }),
+      });
 
-    setTimeout(() => {
+      const data: { reply?: string; error?: string; requireAuth?: boolean } =
+        await res.json().catch(() => ({}));
+
+      const replyText =
+        data.reply ??
+        data.error ??
+        "Sorry, I couldn't process that request. Please try again.";
+
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: Date.now() + 1,
+          text: replyText,
+          sender: "bot",
+          showSignupBtn: Boolean(data.requireAuth),
+        },
+      ]);
+<<<<<<< HEAD
+    } catch {
+=======
+    } catch (error) {
+>>>>>>> ec57b9a (Added pre-qualification bot and Admin Dashboard logic)
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: Date.now() + 1,
+          text: "Sorry, I couldn't reach the assistant. Please check your connection and try again.",
+          sender: "bot",
+        },
+      ]);
+    } finally {
       setTyping(false);
-      setHasReplied(true);
-
-      if (personal && !user) {
-        setMessages((prev) => [
-          ...prev,
-          {
-            id: Date.now() + 1,
-            text: "Please login to view your personal application details.",
-            sender: "bot",
-            showLoginBtn: true,
-          },
-        ]);
-      } else {
-        setMessages((prev) => [
-          ...prev,
-          {
-            id: Date.now() + 1,
-            text: "That's a great question! Our specialists can certainly help with that. Would you like to start a full pre-qualification assessment now?",
-            sender: "bot",
-            showAssessmentBtn: true,
-          },
-        ]);
-      }
-    }, 1500);
-  };
-
-  const handleStartAssessment = () => {
-    setOpen(false);
-    if (!user) {
-      setAuthOpen(true);
-    } else {
-      navigate("/pre-qualification");
     }
   };
 
@@ -133,24 +155,17 @@ const FloatingChat = () => {
                       }`}
                     >
                       {msg.text}
-                      {msg.showAssessmentBtn && (
+                      {msg.showSignupBtn && (
                         <Button
-                          id="chat-start-assessment-btn"
+                          id="chat-signup-btn"
                           size="sm"
                           className="mt-3 w-full gradient-accent text-accent-foreground gap-1.5"
-                          onClick={handleStartAssessment}
+                          onClick={() => {
+                            setOpen(false);
+                            setAuthOpen(true);
+                          }}
                         >
-                          Start Assessment <ArrowRight size={14} />
-                        </Button>
-                      )}
-                      {msg.showLoginBtn && (
-                        <Button
-                          id="chat-login-btn"
-                          size="sm"
-                          className="mt-3 w-full gradient-accent text-accent-foreground gap-1.5"
-                          onClick={() => { setOpen(false); setAuthOpen(true); }}
-                        >
-                          <LogIn size={14} /> Sign In
+                          <LogIn size={14} /> Sign Up
                         </Button>
                       )}
                     </div>
@@ -172,20 +187,22 @@ const FloatingChat = () => {
               {/* Input */}
               <div className="border-t border-border/30 p-3 shrink-0">
                 <form
-                  onSubmit={(e) => { e.preventDefault(); handleSend(); }}
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    void handleSend();
+                  }}
                   className="flex gap-2"
                 >
                   <Input
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
-                    placeholder={hasReplied ? "Use the button above..." : "Type a message..."}
-                    disabled={hasReplied}
+                    placeholder="Ask a mortgage question..."
                     className="flex-1 bg-muted/30 border-border/40 text-sm rounded-xl"
                   />
                   <Button
                     type="submit"
                     size="icon"
-                    disabled={!input.trim() || hasReplied}
+                    disabled={!input.trim()}
                     className="rounded-xl gradient-accent text-accent-foreground shrink-0"
                   >
                     <Send size={16} />
