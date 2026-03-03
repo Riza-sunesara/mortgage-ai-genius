@@ -25,7 +25,3 @@ export default defineConfig(({ mode }) => ({
     },
   },
 }));
-<<<<<<< HEAD
-=======
-
->>>>>>> ec57b9a (Added pre-qualification bot and Admin Dashboard logic)
