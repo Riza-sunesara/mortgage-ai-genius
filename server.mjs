@@ -86,12 +86,9 @@ const APPLICATION_DATA_PATTERNS = [
   "application-specific details",
 ];
 
-<<<<<<< HEAD
-=======
 // Server-side Supabase client for logging interactions.
 // Expects SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY (or a key with insert access)
 // to be configured in the environment.
->>>>>>> ec57b9a (Added pre-qualification bot and Admin Dashboard logic)
 function getSupabaseServerClient() {
   const url = process.env.SUPABASE_URL;
   const key =
@@ -129,14 +126,9 @@ async function logInteraction({ mode, message, response, userId }) {
 
 app.post("/api/chat", async (req, res) => {
   try {
-<<<<<<< HEAD
-    const rawMessage =
-      typeof req.body?.message === "string" ? req.body.message : "";
-=======
     const rawMessage = typeof req.body?.message === "string"
       ? req.body.message
       : "";
->>>>>>> ec57b9a (Added pre-qualification bot and Admin Dashboard logic)
     const mode = req.body?.mode;
 
     const message = rawMessage.trim();
@@ -161,10 +153,7 @@ app.post("/api/chat", async (req, res) => {
 
     const lower = message.toLowerCase();
 
-<<<<<<< HEAD
-=======
     // Prompt-injection protection: detect obvious attempts and refuse
->>>>>>> ec57b9a (Added pre-qualification bot and Admin Dashboard logic)
     if (PROMPT_INJECTION_PATTERNS.some((p) => lower.includes(p))) {
       const safeReply =
         "I’m designed to follow strict safety and privacy rules and can’t ignore or override them, or reveal my internal instructions. I can, however, help answer general questions about US mortgages and guide you to the right tools on the site.";
@@ -179,10 +168,7 @@ app.post("/api/chat", async (req, res) => {
       return res.status(200).json({ reply: safeReply });
     }
 
-<<<<<<< HEAD
-=======
     // Application-specific data questions: answer with a fixed message and flag auth requirement
->>>>>>> ec57b9a (Added pre-qualification bot and Admin Dashboard logic)
     if (APPLICATION_DATA_PATTERNS.some((p) => lower.includes(p))) {
       await logInteraction({
         mode,
@@ -217,15 +203,10 @@ app.post("/api/chat", async (req, res) => {
       result?.response?.text?.() ??
       "I'm sorry, but I wasn't able to generate a response. Please try again.";
 
-<<<<<<< HEAD
-    const requireAuthFromReply =
-      typeof reply === "string" && reply.includes(AUTH_REPLY);
-=======
     // If Gemini independently chooses the same strict security wording,
     // also surface requireAuth so the frontend can guide users to sign up / in.
     const requireAuthFromReply = typeof reply === "string" &&
       reply.includes(AUTH_REPLY);
->>>>>>> ec57b9a (Added pre-qualification bot and Admin Dashboard logic)
 
     if (!reply) {
       reply =
