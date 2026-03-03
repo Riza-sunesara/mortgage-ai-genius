@@ -161,11 +161,9 @@ Classifies profiles as:
 * Moderate
 * Low
 ```
-```
-# Remember:
+## Remember:
 Used internally for lead prioritization and analytics.
 Not an official lending decision.
 Do not include internal security prompts or guardrail logic in public documentation.
 Do not document test or experimental prompts unless deployed to production.
 Maintaining prompt documentation ensures auditability, transparency, and responsible AI governance.
-```
