@@ -1,73 +1,121 @@
-# Welcome to your Lovable project
+# 🏠 Mortgage Pre-Qualification Platform
 
-## Project info
+## Introduction
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+This project is a **mortgage pre-qualification web application** that allows users to quickly estimate their mortgage eligibility and connect with loan options. It includes:
 
-## How can I edit this code?
+* **User-facing pre-qualification bot** powered by AI to guide users step-by-step.
+* **Admin dashboard** to track leads, conversions, and mortgage-related analytics.
 
-There are several ways of editing your application.
+### Problem It Solves
 
-**Use Lovable**
+* **Simplifies mortgage pre-qualification** for prospective homebuyers.
+* **Reduces administrative overhead** by automating initial data collection.
+* **Provides actionable insights** for admins to prioritize high-intent leads.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+## How the Project Works
 
-Changes made via Lovable will be committed automatically to this repo.
+1. **User Flow**
 
-**Use your preferred IDE**
+   * Users answer questions about credit score, income, debt, property value, and loan goals.
+   * The AI bot calculates an estimated pre-qualification and gives guidance.
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+2. **Admin Dashboard**
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+   * Displays lead analytics, funded amounts, conversion rates, and other KPIs.
+   * Integrates with Supabase to store user and loan data.
 
-Follow these steps:
+3. **AI Integration**
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+   * AI bot uses prompts to interpret user inputs and provide relevant mortgage guidance.
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+## Architecture Diagram
 
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+```
+[User] → [AI Bot (Front-end)] → [Supabase DB] → [Admin Dashboard] → [Analytics & Insights]
 ```
 
-**Edit a file directly in GitHub**
+## Guardrails & Jailbreak Testing
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+* AI bot is constrained to **informational guidance only** (not a licensed loan officer).
+* Tested prompts to ensure:
 
-**Use GitHub Codespaces**
+  * No personal financial advice beyond estimates.
+  * Prevented malicious or trick queries from causing undesired behavior.
+* Testing involved:
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+  * Trying edge-case prompts.
+  * Verifying that AI always responds with **general guidance, never personal instructions**.
 
-## What technologies are used for this project?
+## Threat Model
 
-This project is built with:
+* **Data exposure:** User financial data stored in Supabase, secured via authentication.
+* **Prompt injection / misuse:** Guardrails prevent AI from executing or suggesting unsafe actions.
+* **Deployment security:** HTTPS enforced, environment variables (API keys, DB credentials) are stored securely in Vercel.
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+## Setup & Deployment Guide
 
-## How can I deploy this project?
+### Local Setup
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+1. Clone the repository:
 
-## Can I connect a custom domain to my Lovable project?
+```bash
+git clone https://github.com/yourusername/your-repo.git
+cd your-repo
+```
 
-Yes, you can!
+2. Install dependencies:
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+```bash
+npm install
+```
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+3. Add `.env` file with the required keys:
+
+```
+SUPABASE_URL=your_supabase_url
+SUPABASE_KEY=your_supabase_key
+OPENAI_API_KEY=your_openai_key
+```
+
+4. Start development:
+
+```bash
+npm run dev:all
+```
+
+5. Open `http://localhost:5173` in your browser.
+
+### Deployment
+
+* Connect repository to **Vercel**.
+* Ensure environment variables are configured in Vercel dashboard.
+* Run the build command:
+
+```bash
+npm run build
+```
+
+* Vercel automatically deploys after pushing to the main branch.
+
+## AI Prompts Used (Prompt History Record)
+
+* Keep a separate file like `prompts.md` or `prompts.txt` to document all production prompts.
+* Include system instructions, user input, and AI responses.
+* Example entry:
+
+```
+# Prompt 1
+System instruction: You are a U.S. mortgage assistant providing general rate ranges.
+User input: "I have a 720 credit score, $80k income, $300k property. What am I pre-qualified for?"
+Response: AI returns estimated pre-qualification range.
+```
+
+* Do not include test prompts unless they were used in production.
+* Maintaining prompt history ensures transparency and auditability.
+
+## Notes
+
+* Ensure all JSON and config files are valid before deployment.
+* Update architecture diagram if backend or AI integrations change.
+* Maintain prompt history for future AI updates or audits.
