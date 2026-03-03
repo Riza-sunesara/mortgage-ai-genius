@@ -162,8 +162,8 @@ Classifies profiles as:
 * Low
 ```
 ## Remember:
-Used internally for lead prioritization and analytics.
-Not an official lending decision.
-Do not include internal security prompts or guardrail logic in public documentation.
-Do not document test or experimental prompts unless deployed to production.
-Maintaining prompt documentation ensures auditability, transparency, and responsible AI governance.
+1. Used internally for lead prioritization and analytics.
+2. Not an official lending decision.
+3. Do not include internal security prompts or guardrail logic in public documentation.
+4. Do not document test or experimental prompts unless deployed to production.
+5. Maintaining prompt documentation ensures auditability, transparency, and responsible AI governance.
