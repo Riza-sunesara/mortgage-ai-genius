@@ -4,10 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-<<<<<<< HEAD
-=======
 import { computeStage } from "@/utils/stageUtils";
->>>>>>> ec57b9a (Added pre-qualification bot and Admin Dashboard logic)
 import {
   LayoutDashboard, FileText, Clock, CheckCircle2, AlertTriangle,
   ArrowRight, Loader2, RefreshCw, Upload
@@ -30,59 +27,6 @@ interface Application {
   dti_estimate: number | null;
 }
 
-<<<<<<< HEAD
-const getDeadline = () => {
-  const d = new Date();
-  d.setDate(d.getDate() + 3);
-  return d.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
-};
-
-const StatusGuidance = ({ status }: { status: string }) => {
-  if (status === "pending" || status === "Document Pending") {
-    return (
-      <div className="rounded-xl border border-amber-500/30 bg-amber-500/5 p-5">
-        <div className="flex items-start gap-3">
-          <Upload size={20} className="text-amber-500 mt-0.5 shrink-0" />
-          <div>
-            <h4 className="font-display font-semibold text-foreground">Action Required</h4>
-            <p className="text-sm text-muted-foreground mt-1">
-              Please upload your ID and Tax Returns. <strong>Deadline: {getDeadline()}</strong>
-            </p>
-          </div>
-        </div>
-      </div>
-    );
-  }
-  if (status === "Underwriting") {
-    return (
-      <div className="rounded-xl border border-accent/30 bg-accent/5 p-5">
-        <div className="flex items-start gap-3">
-          <Clock size={20} className="text-accent mt-0.5 shrink-0" />
-          <div>
-            <h4 className="font-display font-semibold text-foreground">Under Review</h4>
-            <p className="text-sm text-muted-foreground mt-1">
-              Our team is verifying your data. Please contact us in 5 days for the next step.
-            </p>
-          </div>
-        </div>
-      </div>
-    );
-  }
-  if (status === "Approved") {
-    return (
-      <div className="rounded-xl border border-green-500/30 bg-green-500/5 p-5">
-        <div className="flex items-start gap-3">
-          <CheckCircle2 size={20} className="text-green-500 mt-0.5 shrink-0" />
-          <div>
-            <h4 className="font-display font-semibold text-foreground">Congratulations!</h4>
-            <p className="text-sm text-muted-foreground mt-1">Your application has been approved.</p>
-          </div>
-        </div>
-      </div>
-    );
-  }
-  return null;
-=======
 const formatDate = (d: Date) =>
   d.toLocaleDateString("en-US", {
     month: "long",
@@ -181,7 +125,6 @@ const StatusGuidance = ({
       </div>
     </div>
   );
->>>>>>> ec57b9a (Added pre-qualification bot and Admin Dashboard logic)
 };
 
 const Dashboard = () => {
@@ -206,13 +149,8 @@ const Dashboard = () => {
   }, [user]);
 
   const statusIcon = (s: string | null) => {
-<<<<<<< HEAD
-    if (s === "Approved") return <CheckCircle2 size={16} className="text-green-500" />;
-    if (s === "Underwriting") return <Clock size={16} className="text-accent" />;
-=======
     if (s === "closing") return <CheckCircle2 size={16} className="text-green-500" />;
     if (s === "underwriting") return <Clock size={16} className="text-accent" />;
->>>>>>> ec57b9a (Added pre-qualification bot and Admin Dashboard logic)
     return <AlertTriangle size={16} className="text-amber-500" />;
   };
 
@@ -257,40 +195,6 @@ const Dashboard = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.1 }}
               >
-<<<<<<< HEAD
-                <div className="px-6 py-5 border-b border-border/30 flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    {statusIcon(app.status)}
-                    <h3 className="font-display font-semibold text-foreground">
-                      {app.loan_goal === "buying" ? "Home Purchase" : "Refinance"} Application
-                    </h3>
-                  </div>
-                  <span className="text-xs text-muted-foreground">
-                    {app.created_at ? new Date(app.created_at).toLocaleDateString() : ""}
-                  </span>
-                </div>
-                <div className="p-6 space-y-4">
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                    <div className="rounded-xl bg-muted/50 p-3">
-                      <p className="text-[10px] text-muted-foreground uppercase tracking-wider">Status</p>
-                      <p className="text-sm font-semibold text-foreground capitalize">{app.status || "Pending"}</p>
-                    </div>
-                    <div className="rounded-xl bg-muted/50 p-3">
-                      <p className="text-[10px] text-muted-foreground uppercase tracking-wider">Credit Score</p>
-                      <p className="text-sm font-semibold text-foreground">{app.credit_score || "N/A"}</p>
-                    </div>
-                    <div className="rounded-xl bg-muted/50 p-3">
-                      <p className="text-[10px] text-muted-foreground uppercase tracking-wider">Goal</p>
-                      <p className="text-sm font-semibold text-foreground capitalize">{app.loan_goal || "N/A"}</p>
-                    </div>
-                    <div className="rounded-xl bg-muted/50 p-3">
-                      <p className="text-[10px] text-muted-foreground uppercase tracking-wider">Ref ID</p>
-                      <p className="text-sm font-semibold text-foreground font-mono">#{app.id.slice(0, 8).toUpperCase()}</p>
-                    </div>
-                  </div>
-                  <StatusGuidance status={app.status || "pending"} />
-                </div>
-=======
                 {(() => {
                   const createdAt = app.created_at ?? new Date().toISOString();
                   const stage = computeStage(createdAt);
@@ -338,7 +242,6 @@ const Dashboard = () => {
                     </>
                   );
                 })()}
->>>>>>> ec57b9a (Added pre-qualification bot and Admin Dashboard logic)
               </motion.div>
             ))}
             <div className="flex justify-center pt-4">

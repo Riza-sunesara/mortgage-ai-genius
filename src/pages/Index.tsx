@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import { useState } from "react";
-=======
 import { useEffect, useMemo, useState } from "react";
->>>>>>> ec57b9a (Added pre-qualification bot and Admin Dashboard logic)
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
@@ -21,15 +17,6 @@ const stagger = {
 };
 
 const Index = () => {
-<<<<<<< HEAD
-  const { user } = useAuth();
-  const navigate = useNavigate();
-  const [authOpen, setAuthOpen] = useState(false);
-
-  const handleStartAssessment = () => {
-    if (!user) {
-      setAuthOpen(true);
-=======
   const { user, loading } = useAuth();
   const navigate = useNavigate();
   const [authOpen, setAuthOpen] = useState(false);
@@ -54,7 +41,6 @@ const Index = () => {
       setAuthOpen(true);
     } else if (isAdmin) {
       navigate("/admin");
->>>>>>> ec57b9a (Added pre-qualification bot and Admin Dashboard logic)
     } else {
       navigate("/pre-qualification");
     }
@@ -87,11 +73,7 @@ const Index = () => {
               </motion.p>
               <motion.div variants={fadeUp} className="mt-10 flex flex-col gap-4 sm:flex-row sm:justify-center lg:justify-start">
                 <Button onClick={handleStartAssessment} size="lg" className="gradient-accent text-accent-foreground shadow-lg glow-accent hover:shadow-xl hover:brightness-110 transition-all text-base h-12 px-8" id="start-assessment-btn">
-<<<<<<< HEAD
-                  Start Free Assessment
-=======
                   Let's Get Started
->>>>>>> ec57b9a (Added pre-qualification bot and Admin Dashboard logic)
                   <ArrowRight size={18} className="ml-1" />
                 </Button>
                 <Button asChild size="lg" variant="outline" className="h-12 px-8 text-base border-border/60 hover:bg-accent/5 hover:border-accent/40 transition-all">
@@ -266,11 +248,7 @@ const Index = () => {
             </h2>
             <p className="mt-5 text-primary-foreground/70 text-lg">Start your journey to homeownership with confidence.</p>
             <Button onClick={handleStartAssessment} size="lg" className="mt-10 gradient-accent text-accent-foreground shadow-xl glow-accent hover:shadow-2xl hover:brightness-110 transition-all h-14 px-10 text-base" id="cta-start-assessment-btn">
-<<<<<<< HEAD
-              Start Assessment
-=======
               Let's Get Started
->>>>>>> ec57b9a (Added pre-qualification bot and Admin Dashboard logic)
               <ArrowRight size={18} className="ml-2" />
             </Button>
           </motion.div>
