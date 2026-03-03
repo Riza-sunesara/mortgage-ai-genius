@@ -2,18 +2,12 @@ import { useState, useEffect, useRef } from "react";
 import { BrainCircuit, Clock, CheckCircle2, Loader2, ArrowRight, Home, RefreshCw } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-<<<<<<< HEAD
-import { useNavigate } from "react-router-dom";
-import { useAuth } from "@/contexts/AuthContext";
-import { supabase } from "@/integrations/supabase/client";
-=======
 import { Input } from "@/components/ui/input";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
 import { purchaseFlow, refinanceFlow, ChatFlowStep } from "@/utils/chatFlow";
 import AuthModal from "@/components/AuthModal";
->>>>>>> ec57b9a (Added pre-qualification bot and Admin Dashboard logic)
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -22,41 +16,6 @@ const fadeUp = {
 
 interface ChatEntry {
   id: number;
-<<<<<<< HEAD
-  type: "bot" | "user" | "options" | "loading" | "result";
-  text?: string;
-  options?: { label: string; value: string }[];
-}
-
-const STEPS = [
-  {
-    question: "What is your estimated credit score?",
-    options: [
-      { label: "720+ Excellent", value: "excellent" },
-      { label: "680–719 Good", value: "good" },
-      { label: "Below 680", value: "below" },
-    ],
-  },
-  {
-    question: "What is your primary goal?",
-    options: [
-      { label: "Buying a Home", value: "buying" },
-      { label: "Refinancing", value: "refinancing" },
-    ],
-  },
-];
-
-const PreQualification = () => {
-  const [entries, setEntries] = useState<ChatEntry[]>([]);
-  const [step, setStep] = useState(0);
-  const [finished, setFinished] = useState(false);
-  const [analyzing, setAnalyzing] = useState(false);
-  const [answers, setAnswers] = useState<Record<string, string>>({});
-  const bottomRef = useRef<HTMLDivElement>(null);
-  const initialized = useRef(false);
-  const navigate = useNavigate();
-  const { user } = useAuth();
-=======
   type: "bot" | "user" | "result";
   text?: string;
 }
@@ -103,7 +62,6 @@ const PreQualification = () => {
   const initialized = useRef(false);
   const navigate = useNavigate();
   const { user, loading } = useAuth();
->>>>>>> ec57b9a (Added pre-qualification bot and Admin Dashboard logic)
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -112,100 +70,6 @@ const PreQualification = () => {
   // Start the conversation
   useEffect(() => {
     if (initialized.current) return;
-<<<<<<< HEAD
-    initialized.current = true;
-    const timeout = setTimeout(() => {
-      setEntries([
-        { id: 1, type: "bot", text: "Welcome! I'll guide you through a quick pre-qualification assessment. This takes about 3–5 minutes." },
-      ]);
-      setTimeout(() => {
-        setEntries((prev) => [
-          ...prev,
-          { id: 2, type: "bot", text: STEPS[0].question },
-          { id: 3, type: "options", options: STEPS[0].options },
-        ]);
-      }, 800);
-    }, 400);
-    return () => clearTimeout(timeout);
-  }, []);
-
-  const handleSelect = async (label: string, value: string) => {
-    if (finished || analyzing) return;
-
-    const newAnswers = { ...answers };
-    if (step === 0) newAnswers.credit_score = value;
-    if (step === 1) newAnswers.loan_goal = value;
-    setAnswers(newAnswers);
-
-    // Remove options entry, add user answer
-    setEntries((prev) => [
-      ...prev.filter((e) => e.type !== "options"),
-      { id: Date.now(), type: "user", text: label },
-    ]);
-
-    const nextStep = step + 1;
-
-    if (nextStep < STEPS.length) {
-      setStep(nextStep);
-      setTimeout(() => {
-        setEntries((prev) => [
-          ...prev,
-          { id: Date.now() + 1, type: "bot", text: STEPS[nextStep].question },
-          { id: Date.now() + 2, type: "options", options: STEPS[nextStep].options },
-        ]);
-      }, 600);
-    } else {
-      // Final step — analyze and save
-      setAnalyzing(true);
-      setTimeout(() => {
-        setEntries((prev) => [
-          ...prev,
-          { id: Date.now() + 1, type: "bot", text: "Analyzing your profile..." },
-        ]);
-      }, 400);
-
-      // Save to Supabase
-      if (user) {
-        await supabase.from("mortgage_applications").insert({
-          user_id: user.id,
-          credit_score: newAnswers.credit_score,
-          loan_goal: newAnswers.loan_goal,
-          status: "pending",
-        });
-      }
-
-      setTimeout(() => {
-        setAnalyzing(false);
-        setFinished(true);
-        setEntries((prev) => [
-          ...prev.filter((e) => e.text !== "Analyzing your profile..."),
-          { id: Date.now() + 2, type: "result" },
-        ]);
-      }, 2500);
-    }
-  };
-
-  const handleRestart = () => {
-    setStep(0);
-    setFinished(false);
-    setAnalyzing(false);
-    setAnswers({});
-    initialized.current = false;
-    setEntries([]);
-    setTimeout(() => {
-      initialized.current = true;
-      setEntries([
-        { id: 1, type: "bot", text: "Welcome! I'll guide you through a quick pre-qualification assessment. This takes about 3–5 minutes." },
-      ]);
-      setTimeout(() => {
-        setEntries((prev) => [
-          ...prev,
-          { id: 2, type: "bot", text: STEPS[0].question },
-          { id: 3, type: "options", options: STEPS[0].options },
-        ]);
-      }, 800);
-    }, 300);
-=======
 
     // Wait for auth to resolve before showing auth UI
     if (loading) return;
@@ -651,7 +515,6 @@ Borrower profile:
     }
 
     return null;
->>>>>>> ec57b9a (Added pre-qualification bot and Admin Dashboard logic)
   };
 
   const refId = `#AUTO-${Math.floor(10000 + Math.random() * 90000)}`;
@@ -729,33 +592,6 @@ Borrower profile:
                     );
                   }
 
-<<<<<<< HEAD
-                  if (entry.type === "options") {
-                    return (
-                      <motion.div
-                        key={entry.id}
-                        initial={{ opacity: 0, y: 12 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.35 }}
-                        className="flex flex-wrap gap-2 pl-11"
-                      >
-                        {entry.options?.map((opt) => (
-                          <Button
-                            key={opt.value}
-                            variant="outline"
-                            size="sm"
-                            onClick={() => handleSelect(opt.label, opt.value)}
-                            className="rounded-xl border-accent/40 text-accent hover:gradient-accent hover:text-accent-foreground hover:border-transparent transition-all duration-200"
-                          >
-                            {opt.label}
-                          </Button>
-                        ))}
-                      </motion.div>
-                    );
-                  }
-
-=======
->>>>>>> ec57b9a (Added pre-qualification bot and Admin Dashboard logic)
                   if (entry.type === "result") {
                     return (
                       <motion.div
@@ -775,10 +611,6 @@ Borrower profile:
                               <p className="text-xs text-muted-foreground">Reference ID: {refId}</p>
                             </div>
                           </div>
-<<<<<<< HEAD
-=======
-
->>>>>>> ec57b9a (Added pre-qualification bot and Admin Dashboard logic)
                           <p className="text-sm text-foreground leading-relaxed mb-5">
                             Based on your inputs, you are a <strong className="text-accent">strong candidate</strong> for a 30-year fixed-rate mortgage! Our team will review your submission and contact you shortly.
                           </p>
@@ -790,25 +622,6 @@ Borrower profile:
                             >
                               <ArrowRight size={14} /> View Dashboard
                             </Button>
-<<<<<<< HEAD
-                            <Button
-                              id="prequal-return-home-btn"
-                              variant="outline"
-                              className="rounded-xl gap-1.5"
-                              onClick={() => navigate("/")}
-                            >
-                              <Home size={14} /> Return Home
-                            </Button>
-                            <Button
-                              id="prequal-restart-btn"
-                              variant="outline"
-                              className="rounded-xl gap-1.5"
-                              onClick={handleRestart}
-                            >
-                              <RefreshCw size={14} /> Restart
-                            </Button>
-=======
->>>>>>> ec57b9a (Added pre-qualification bot and Admin Dashboard logic)
                           </div>
                         </div>
                       </motion.div>
@@ -833,11 +646,8 @@ Borrower profile:
                 </motion.div>
               )}
 
-<<<<<<< HEAD
-=======
               {renderInput()}
 
->>>>>>> ec57b9a (Added pre-qualification bot and Admin Dashboard logic)
               <div ref={bottomRef} />
             </div>
           </div>
@@ -852,11 +662,8 @@ Borrower profile:
           This process takes approximately 3–5 minutes. Your data is encrypted and secure.
         </motion.p>
       </div>
-<<<<<<< HEAD
-=======
 
       <AuthModal open={authModalOpen} onOpenChange={setAuthModalOpen} />
->>>>>>> ec57b9a (Added pre-qualification bot and Admin Dashboard logic)
     </main>
   );
 };
