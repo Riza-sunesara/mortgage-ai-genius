@@ -205,7 +205,6 @@ const FloatingChat = () => {
                             }}
                           >
                             <LogIn size={14} /> Sign Up
-                            <LogIn size={14} /> Sign Up
                           </Button>
                         )
                       }
