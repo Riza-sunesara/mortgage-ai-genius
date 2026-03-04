@@ -35,32 +35,18 @@ const FloatingChat = () => {
     if (!trimmed) return;
 
     // Basic client-side length guard to mirror backend validation
-    if (trimmed.length > 1000) {
+    if (trimmed.length > 200) {
       setMessages((prev) => [
         ...prev,
         {
           id: Date.now(),
-          text: "Please keep your question under 1000 characters.",
+          text: "Please keep your question under 200 characters.",
           sender: "bot",
         },
       ]);
       return;
     }
-    if (!trimmed) return;
-
-    // Basic client-side length guard to mirror backend validation
-    if (trimmed.length > 1000) {
-      setMessages((prev) => [
-        ...prev,
-        {
-          id: Date.now(),
-          text: "Please keep your question under 1000 characters.",
-          sender: "bot",
-        },
-      ]);
-      return;
-    }
-
+    
     const userMsg: ChatMessage = {
       id: Date.now(),
       text: trimmed,
@@ -108,46 +94,7 @@ const FloatingChat = () => {
       ]);
     } finally {
       setTyping(false);
-      try {
-        const res = await fetch("/api/chat", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            message: trimmed,
-            mode: "general",
-          }),
-        });
-
-        const data: { reply?: string; error?: string; requireAuth?: boolean } =
-          await res.json().catch(() => ({}));
-
-        const replyText =
-          data.reply ??
-          data.error ??
-          "Sorry, I couldn't process that request. Please try again.";
-
-        setMessages((prev) => [
-          ...prev,
-          {
-            id: Date.now() + 1,
-            text: replyText,
-            sender: "bot",
-            showSignupBtn: Boolean(data.requireAuth),
-          },
-        ]);
-      } catch {
-        setMessages((prev) => [
-          ...prev,
-          {
-            id: Date.now() + 1,
-            text: "Sorry, I couldn't reach the assistant. Please check your connection and try again.",
-            sender: "bot",
-          },
-        ]);
-      } finally {
-        setTyping(false);
-      }
-    };
+    }
   };
   return (
     <>
@@ -234,6 +181,7 @@ const FloatingChat = () => {
                   className="flex gap-2"
                 >
                   <Input
+                    maxLength={200}
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
                     placeholder="Ask a mortgage question..."
@@ -242,7 +190,7 @@ const FloatingChat = () => {
                   <Button
                     type="submit"
                     size="icon"
-                    disabled={!input.trim()}
+                    disabled={!input.trim() || typing}
                     className="rounded-xl gradient-accent text-accent-foreground shrink-0"
                   >
                     <Send size={16} />
