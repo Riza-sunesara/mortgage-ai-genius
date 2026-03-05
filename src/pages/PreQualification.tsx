@@ -407,7 +407,7 @@ Borrower profile:
       if (status === 201) {
         setTimeout(() => {
           navigate("/dashboard");
-        }, 900);
+        }, 15000);
       }
     } finally {
       setAnalyzing(false);
@@ -640,7 +640,7 @@ Borrower profile:
                     </div>
                     <div className="bg-muted/50 rounded-2xl rounded-tl-md px-5 py-4 flex items-center gap-3">
                       <Loader2 size={18} className="text-accent animate-spin" />
-                      <span className="text-sm text-muted-foreground">Analyzing your profile...</span>
+                      <span className="text-sm text-muted-foreground">AI is analyzing your mortgage profile...</span>
                     </div>
                   </div>
                 </motion.div>
