@@ -5,7 +5,7 @@ const SYSTEM_PROMPT =
   "You are a professional assistant integrated into a US mortgage web application. Respond clearly and concisely to mortgage-related questions. Politely decline unrelated questions. Do not provide legal or financial advice.";
 
 export default async function handler(req: any, res: any) {
-  // Only allow POST
+
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
   }
