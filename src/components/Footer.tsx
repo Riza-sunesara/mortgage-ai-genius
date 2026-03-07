@@ -12,8 +12,8 @@ const Footer = () => (
             <div className="flex h-7 w-7 items-center justify-center rounded-lg gradient-accent">
               <Zap size={14} className="text-accent-foreground" />
             </div>
-            <span className="text-foreground">Mortgage</span>
-            <span className="text-accent">AI</span>
+            <span className="text-foreground">Swift</span>
+            <span className="text-accent">QualiFi</span>
           </Link>
           <p className="mt-4 text-sm text-muted-foreground leading-relaxed">
             AI-powered mortgage pre-qualification for the modern homebuyer.
