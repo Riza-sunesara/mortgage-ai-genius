@@ -113,7 +113,7 @@ const FloatingChat = () => {
               <div className="flex items-center justify-between border-b border-border/30 px-5 py-4 shrink-0">
                 <div className="flex items-center gap-2">
                   <Sparkles size={16} className="text-accent" />
-                  <span className="text-sm font-semibold text-foreground">MortgageAI Assistant</span>
+                  <span className="text-sm font-semibold text-foreground">SwiftQualiFi Assistant</span>
                 </div>
                 <button
                   onClick={() => setOpen(false)}

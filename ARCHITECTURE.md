@@ -1,11 +1,11 @@
 # ARCHITECTURE.md
-### MortgageAI — System Architecture Overview
+### SwiftQualiFi — System Architecture Overview
 
 ---
 
 ## 1. Product Summary
 
-MortgageAI (`mortgage-ai-genius.vercel.app`) is an AI-powered mortgage pre-qualification and advisory platform. It takes a first-time homebuyer from zero knowledge to a broker-reviewed, AI-scored application — all in one session — while giving mortgage brokers an admin pipeline dashboard with AI-generated applicant summaries and priority scoring.
+SwiftQualiFi (`mortgage-ai-genius.vercel.app`) is an AI-powered mortgage pre-qualification and advisory platform. It takes a first-time homebuyer from zero knowledge to a broker-reviewed, AI-scored application — all in one session — while giving mortgage brokers an admin pipeline dashboard with AI-generated applicant summaries and priority scoring.
 
 ---
 

@@ -1,11 +1,11 @@
 # PROMPTS.md
-### MortgageAI — Prompt Engineering Documentation
+### SwiftQualiFi — Prompt Engineering Documentation
 
 ---
 
 ## Overview
 
-This document records all AI prompts used in MortgageAI, their purpose, design rationale, input variables, and output format. All prompts follow structured prompt engineering principles: explicit role assignment, domain-specific constraints, defined output schema, and hallucination guardrails.
+This document records all AI prompts used in SwiftQualiFi, their purpose, design rationale, input variables, and output format. All prompts follow structured prompt engineering principles: explicit role assignment, domain-specific constraints, defined output schema, and hallucination guardrails.
 
 ---
 
@@ -145,15 +145,15 @@ should handle this file.
 
 ---
 
-## Prompt 4: MortgageAI Chatbot
+## Prompt 4: SwiftQualiFi Chatbot
 
-**Purpose:** Floating assistant widget available site-wide (no login required). Answers user questions about the mortgage process, MortgageAI features, and general eligibility concepts. Serves as the education layer before users reach the calculator or pre-qualification form.
+**Purpose:** Floating assistant widget available site-wide (no login required). Answers user questions about the mortgage process, SwiftQualiFi features, and general eligibility concepts. Serves as the education layer before users reach the calculator or pre-qualification form.
 
 ### System Prompt
 ```
-You are MortgageAI Assistant, a helpful and professional mortgage
+You are SwiftQualiFi Assistant, a helpful and professional mortgage
 guidance chatbot. Answer questions about the mortgage process,
-pre-qualification, eligibility, and how MortgageAI works.
+pre-qualification, eligibility, and how SwiftQualiFi works.
 
 Rules:
 - Do not provide personalized financial advice or guaranteed eligibility
@@ -163,11 +163,11 @@ Rules:
   to their Dashboard.
 - If the user asks whether they qualify, encourage them to use the
   free Pre-Qualification tool.
-- Stay scoped to mortgage and MortgageAI topics only.
+- Stay scoped to mortgage and SwiftQualiFi topics only.
 ```
 
 ### Guardrails
-- Scoped strictly to mortgage / MortgageAI domain
+- Scoped strictly to mortgage / SwiftQualiFi domain
 - Explicitly avoids approval guarantees or credit decisions
 - Redirects application-specific queries to the dashboard
 - Redirects eligibility questions to the pre-qualification flow (driving conversion)

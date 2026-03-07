@@ -170,7 +170,7 @@ const Index = () => {
           <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <motion.div className="text-center" initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUp}>
               <span className="text-xs font-semibold uppercase tracking-widest text-accent">Features</span>
-              <h2 className="mt-3 font-display text-3xl font-bold text-foreground sm:text-4xl">Why Choose MortgageAI?</h2>
+              <h2 className="mt-3 font-display text-3xl font-bold text-foreground sm:text-4xl">Why Choose SwiftQualiFi?</h2>
               <p className="mt-4 text-muted-foreground max-w-lg mx-auto">Everything you need for smarter, faster mortgage decisions — powered by intelligent technology.</p>
             </motion.div>
             <motion.div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3" initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={stagger}>

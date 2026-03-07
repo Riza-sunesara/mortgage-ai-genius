@@ -1,29 +1,29 @@
 # DATA_POLICY.md
-### MortgageAI — Data Privacy & Security Policy
+### SwiftQualiFi — Data Privacy & Security Policy
 
 **Effective Date:** March 2026 | **Version:** 2.0
 
-> This platform provides estimated mortgage insights and does not constitute financial approval. All calculations are for informational purposes only. MortgageAI is not a licensed lender, broker, or credit agency. This policy reflects compliance alignment with US federal financial privacy law (GLBA), consumer credit law (FCRA), California privacy law (CCPA), and international data protection standards (GDPR) where applicable.
+> This platform provides estimated mortgage insights and does not constitute financial approval. All calculations are for informational purposes only. SwiftQualiFi is not a licensed lender, broker, or credit agency. This policy reflects compliance alignment with US federal financial privacy law (GLBA), consumer credit law (FCRA), California privacy law (CCPA), and international data protection standards (GDPR) where applicable.
 
 ---
 
 ## 1. Introduction
 
-MortgageAI is an AI-powered mortgage pre-qualification platform serving users in the United States. This policy describes how we collect, store, process, and protect user data in accordance with applicable US and international privacy regulations.
+SwiftQualiFi is an AI-powered mortgage pre-qualification platform serving users in the United States. This policy describes how we collect, store, process, and protect user data in accordance with applicable US and international privacy regulations.
 
 ### 1.1 Applicable Regulatory Frameworks
 
 | Regulation | Full Name | Why It Applies |
 |---|---|---|
-| **GLBA** | Gramm-Leach-Bliley Act (15 U.S.C. § 6801) | MortgageAI handles nonpublic personal financial information (NPI) of consumers exploring mortgage options |
-| **FCRA** | Fair Credit Reporting Act (15 U.S.C. § 1681) | MortgageAI collects self-reported credit score ranges; we do not pull formal credit reports |
+| **GLBA** | Gramm-Leach-Bliley Act (15 U.S.C. § 6801) | SwiftQualiFi handles nonpublic personal financial information (NPI) of consumers exploring mortgage options |
+| **FCRA** | Fair Credit Reporting Act (15 U.S.C. § 1681) | SwiftQualiFi collects self-reported credit score ranges; we do not pull formal credit reports |
 | **CCPA** | California Consumer Privacy Act (Cal. Civ. Code § 1798.100) | Applies to California residents using the platform |
 | **GDPR** | General Data Protection Regulation (EU) 2016/679 | Applies to any EU-based users accessing the platform |
 | **SOC 2 Type I** | AICPA Trust Services Criteria | Guiding framework for our security controls |
 
 ### 1.2 HIPAA Applicability
 
-MortgageAI does **not** collect Protected Health Information (PHI) as defined under HIPAA (45 CFR § 160.103). No medical records, health history, disability status, or health insurance data is collected at any point. HIPAA controls are therefore not directly applicable to this platform. If MortgageAI expands to collect any health-related data in the future, this policy will be revised accordingly.
+SwiftQualiFi does **not** collect Protected Health Information (PHI) as defined under HIPAA (45 CFR § 160.103). No medical records, health history, disability status, or health insurance data is collected at any point. HIPAA controls are therefore not directly applicable to this platform. If SwiftQualiFi expands to collect any health-related data in the future, this policy will be revised accordingly.
 
 ---
 
@@ -43,7 +43,7 @@ MortgageAI does **not** collect Protected Health Information (PHI) as defined un
 - Self-reported credit score range *(note: this is user-provided, not a formal credit pull — no hard inquiry is initiated)*
 - Monthly debt obligations
 
-> **FCRA notice:** MortgageAI does not access, request, or store formal credit reports. The credit score field is self-reported by the user for pre-qualification estimation only. No hard or soft credit inquiry is made on behalf of any lender. Users are not subject to adverse action based on this platform's output.
+> **FCRA notice:** SwiftQualiFi does not access, request, or store formal credit reports. The credit score field is self-reported by the user for pre-qualification estimation only. No hard or soft credit inquiry is made on behalf of any lender. Users are not subject to adverse action based on this platform's output.
 
 ### 2.3 Calculator Usage Data
 - Inputs: property price, down payment, interest rate, income, monthly debt, loan term
@@ -66,7 +66,7 @@ MortgageAI does **not** collect Protected Health Information (PHI) as defined un
 - Protected Health Information (PHI) of any kind
 - Biometric data
 
-MortgageAI is a pre-qualification estimation tool only. It does not initiate formal loan applications, credit inquiries, or adverse action notices under FCRA.
+SwiftQualiFi is a pre-qualification estimation tool only. It does not initiate formal loan applications, credit inquiries, or adverse action notices under FCRA.
 
 ---
 
@@ -95,7 +95,7 @@ MortgageAI is a pre-qualification estimation tool only. It does not initiate for
 
 ## 6. GLBA Privacy Notice (Safeguards Rule Compliance)
 
-Under the **Gramm-Leach-Bliley Act Safeguards Rule** (16 CFR Part 314, updated 2023), MortgageAI implements the following as a financial services-adjacent platform:
+Under the **Gramm-Leach-Bliley Act Safeguards Rule** (16 CFR Part 314, updated 2023), SwiftQualiFi implements the following as a financial services-adjacent platform:
 
 - **Information Security Program:** A written security program governing collection, storage, and disposal of NPI
 - **Access Controls:** Role-based access — users access only their own data; admin access requires separate authenticated credentials
@@ -108,13 +108,13 @@ Under the **Gramm-Leach-Bliley Act Safeguards Rule** (16 CFR Part 314, updated 2
 
 ## 7. FCRA Compliance Statement
 
-MortgageAI acknowledges the following under the **Fair Credit Reporting Act**:
+SwiftQualiFi acknowledges the following under the **Fair Credit Reporting Act**:
 
 - We do **not** obtain consumer reports from any Consumer Reporting Agency (CRA)
 - We do **not** make formal credit decisions — outputs are estimates only
 - We do **not** issue adverse action notices as defined under FCRA § 615
 - Self-reported credit score data provided by users is used solely to generate a pre-qualification estimate and is not shared with lenders or CRAs
-- Users will not experience any impact to their credit score from using MortgageAI
+- Users will not experience any impact to their credit score from using SwiftQualiFi
 
 ---
 
@@ -124,7 +124,7 @@ California residents have the following rights under the **California Consumer P
 
 - **Right to Know:** Request disclosure of what personal data we have collected about you and how it is used
 - **Right to Delete:** Request deletion of personal data we hold about you (fulfilled within 45 days)
-- **Right to Opt-Out:** We do not sell personal data — no opt-out mechanism required, but confirmed explicitly: **MortgageAI does not sell consumer data**
+- **Right to Opt-Out:** We do not sell personal data — no opt-out mechanism required, but confirmed explicitly: **SwiftQualiFi does not sell consumer data**
 - **Right to Non-Discrimination:** Exercising CCPA rights will not result in denial of service or different pricing
 - **Right to Correct:** Request correction of inaccurate personal information we hold
 
@@ -134,7 +134,7 @@ To exercise CCPA rights, contact us via the platform or GitHub repository. We wi
 
 ## 9. GDPR Rights (EU / International Users)
 
-For users accessing MortgageAI from the European Union or other GDPR-applicable jurisdictions:
+For users accessing SwiftQualiFi from the European Union or other GDPR-applicable jurisdictions:
 
 - **Right of Access (Art. 15):** Request a copy of all personal data we hold about you
 - **Right to Rectification (Art. 16):** Request correction of inaccurate data
@@ -142,9 +142,9 @@ For users accessing MortgageAI from the European Union or other GDPR-applicable 
 - **Right to Restrict Processing (Art. 18):** Request that we limit how we use your data
 - **Right to Data Portability (Art. 20):** Request your data in a structured, machine-readable format
 - **Right to Object (Art. 21):** Object to processing based on legitimate interests
-- **Right not to be subject to automated decision-making (Art. 22):** MortgageAI's AI outputs are **advisory estimates only** — no legally binding automated decisions are made
+- **Right not to be subject to automated decision-making (Art. 22):** SwiftQualiFi's AI outputs are **advisory estimates only** — no legally binding automated decisions are made
 
-> **Data Controller:** MortgageAI (Riza Zulfiqar) is the data controller for all personal data processed on this platform.
+> **Data Controller:** SwiftQualiFi (Riza Zulfiqar) is the data controller for all personal data processed on this platform.
 
 ---
 
@@ -207,7 +207,7 @@ We do not sell, rent, license, or share user data with advertisers, data brokers
 
 ## 14. Children's Privacy (COPPA)
 
-MortgageAI is intended for adults (18+) engaged in or exploring the home purchase process. We do not knowingly collect personal data from individuals under the age of 18. If we become aware that a minor has submitted data, it will be deleted immediately. This aligns with the **Children's Online Privacy Protection Act (COPPA, 15 U.S.C. § 6501)**.
+SwiftQualiFi is intended for adults (18+) engaged in or exploring the home purchase process. We do not knowingly collect personal data from individuals under the age of 18. If we become aware that a minor has submitted data, it will be deleted immediately. This aligns with the **Children's Online Privacy Protection Act (COPPA, 15 U.S.C. § 6501)**.
 
 ---
 
@@ -219,7 +219,7 @@ This policy will be reviewed and updated when:
 - Applicable law changes (e.g., new state privacy laws)
 - At minimum, annually
 
-Users will be notified of material changes via the platform. Continued use of MortgageAI after notification constitutes acceptance of the updated policy.
+Users will be notified of material changes via the platform. Continued use of SwiftQualiFi after notification constitutes acceptance of the updated policy.
 
 ---
 
@@ -227,7 +227,7 @@ Users will be notified of material changes via the platform. Continued use of Mo
 
 For any data access, deletion, correction, or privacy concern requests:
 
-- Contact via the MortgageAI platform
+- Contact via the SwiftQualiFi platform
 - Contact via the GitHub repository
 - Reference: **DATA_POLICY.md v2.0**
 
@@ -235,4 +235,4 @@ All requests will receive a response within **10 business days** and will be ful
 
 ---
 
-*MortgageAI is not a licensed mortgage lender, broker, or credit reporting agency. This platform is an AI-powered estimation tool for informational purposes only. Nothing on this platform constitutes a credit decision, formal pre-approval, or guarantee of mortgage eligibility.*
+*SwiftQualiFi is not a licensed mortgage lender, broker, or credit reporting agency. This platform is an AI-powered estimation tool for informational purposes only. Nothing on this platform constitutes a credit decision, formal pre-approval, or guarantee of mortgage eligibility.*

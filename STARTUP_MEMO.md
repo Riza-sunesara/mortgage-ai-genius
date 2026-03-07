@@ -1,5 +1,5 @@
 # STARTUP_MEMO.md
-### MortgageAI — 1-Page Startup Memo
+### SwiftQualiFi — 1-Page Startup Memo
 
 **By Riza Zulfiqar | March 2026**
 **Live:** https://mortgage-ai-genius.vercel.app
@@ -10,7 +10,7 @@
 
 First-time homebuyers in the US enter the mortgage process completely blind. They don't know what DTI means, whether their credit score qualifies them, or what monthly payment their income can realistically support — and the only way to find out today is to call a broker, sit through a consultation, and submit documents, only to be told they don't qualify.
 
-> *First-time homebuyers waste weeks across fragmented tools — generic calculators, Reddit threads, and bank websites — trying to self-assess mortgage eligibility before approaching a broker. Brokers simultaneously waste hours on unqualified consultations. MortgageAI collapses this fragmented journey into a single AI-powered session: the borrower gets educated, checks affordability, and submits a structured pre-qualification — and the broker receives a scored, AI-prioritized application rather than a cold, unvetted lead.*
+> *First-time homebuyers waste weeks across fragmented tools — generic calculators, Reddit threads, and bank websites — trying to self-assess mortgage eligibility before approaching a broker. Brokers simultaneously waste hours on unqualified consultations. SwiftQualiFi collapses this fragmented journey into a single AI-powered session: the borrower gets educated, checks affordability, and submits a structured pre-qualification — and the broker receives a scored, AI-prioritized application rather than a cold, unvetted lead.*
 
 **Who:** ~2 million first-time homebuyers annually in the US + small independent mortgage brokerages (2–10 agents)
 
@@ -24,7 +24,7 @@ First-time homebuyers in the US enter the mortgage process completely blind. The
 
 ## The Solution
 
-MortgageAI is the first neutral, AI-powered mortgage journey platform that takes a borrower from zero knowledge to a broker-reviewed pre-qualification in one session — no prior lender relationship required.
+SwiftQualiFi is the first neutral, AI-powered mortgage journey platform that takes a borrower from zero knowledge to a broker-reviewed pre-qualification in one session — no prior lender relationship required.
 
 **Three-layer user flow:**
 1. **Educate** → Public AI chatbot answers mortgage questions before any commitment

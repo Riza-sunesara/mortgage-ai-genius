@@ -1,4 +1,4 @@
-# 🏠 Mortgage Pre-Qualification Platform
+# 🏠 SwiftQualiFi - An AI based Mortgage Pre-Qualification Platform
 
 ## Introduction
 

@@ -40,7 +40,7 @@ const Footer = () => (
       <div className="mt-12 border-t border-border/40 pt-8">
         <p className="text-xs text-muted-foreground text-center leading-relaxed max-w-2xl mx-auto">
           This platform provides estimated mortgage insights and does not constitute financial approval. 
-          All calculations are for informational purposes only. © {new Date().getFullYear()} MortgageAI. All rights reserved.
+          All calculations are for informational purposes only. © {new Date().getFullYear()} SwiftQualiFi. All rights reserved.
         </p>
       </div>
     </div>
