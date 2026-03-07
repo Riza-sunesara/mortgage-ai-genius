@@ -56,8 +56,7 @@ const Navbar = () => {
             <div className="flex h-8 w-8 items-center justify-center rounded-lg gradient-accent">
               <Zap size={16} className="text-accent-foreground" />
             </div>
-            <span className="text-foreground">Swift</span>
-            <span className="text-accent">QualiFi</span>
+            <span className="text-foreground">Swift<span className="text-accent">QualiFi</span> </span>
           </Link>
 
           {/* Desktop */}
